@@ -1,5 +1,6 @@
 const { exec, spawn } = require("child_process");
 const fs = require("fs");
+const path = require("path");
 const bodyParser = require("body-parser");
 const http = require("http");
 const express = require("express");
@@ -100,41 +101,80 @@ int main() {
 
 // C++ Code Execution Logic
 function executeCode(code, stdin, flags, callback) {
-  const dirPath = "./temp/" + Date.now();
+  const dirPath = path.join("/tmp", Date.now().toString());
   fs.mkdir(dirPath, { recursive: true }, (err) => {
     if (err) {
+      console.error("Failed to create directory:", err);
       return callback({ status: 500, stderr: "Failed to create directory", stdout: "" });
     }
 
-    fs.writeFile(`${dirPath}/main.cpp`, code, (err) => {
+    const cppFilePath = path.join(dirPath, "main.cpp");
+    const executablePath = path.join(dirPath, "a.out");
+
+    fs.writeFile(cppFilePath, code, (err) => {
       if (err) {
+        console.error("Failed to write file:", err);
         return callback({ status: 500, stderr: "Failed to write file", stdout: "" });
       }
 
-      exec(`g++ ${flags} ${dirPath}/main.cpp -o ${dirPath}/a`, (error, stdout, stderr) => {
+      exec(`g++ ${flags} ${cppFilePath} -o ${executablePath}`, (error, stdout, stderr) => {
         if (error) {
+          console.error("Compilation error:", error);
           fs.rmSync(dirPath, { recursive: true, force: true });
-          return callback({ status: 400, stderr: stderr, stdout: "" });
+          return callback({ status: 400, stderr: stderr || error.message, stdout: "" });
         }
 
-        const child = spawn(`${dirPath}/a`);
-        child.stdin.write(stdin);
+        // Execute the compiled program
+        const child = spawn(executablePath);
+        
+        // Provide stdin input
+        if (stdin) {
+          child.stdin.write(stdin);
+        }
         child.stdin.end();
 
         let output = "";
+        let errorOutput = "";
+
         child.stdout.on("data", (data) => {
           output += data.toString();
         });
 
-        child.on("close", () => {
-          fs.rmSync(dirPath, { recursive: true, force: true });
-          return callback({ status: 200, stderr: stderr, stdout: output, err: null });
+        child.stderr.on("data", (data) => {
+          errorOutput += data.toString();
         });
 
-        setTimeout(() => {
-          child.kill();
+        child.on("close", (code) => {
+          // Clean up temporary files
           fs.rmSync(dirPath, { recursive: true, force: true });
-          callback({ status: 408, stderr: "Execution timeout", stdout: output });
+          
+          return callback({ 
+            status: 200, 
+            stderr: errorOutput, 
+            stdout: output, 
+            err: null 
+          });
+        });
+
+        child.on("error", (err) => {
+          console.error("Execution error:", err);
+          fs.rmSync(dirPath, { recursive: true, force: true });
+          callback({ 
+            status: 500, 
+            stderr: err.message, 
+            stdout: output 
+          });
+        });
+
+        // Set execution timeout
+        setTimeout(() => {
+          child.kill("SIGKILL");
+          fs.rmSync(dirPath, { recursive: true, force: true });
+          callback({ 
+            status: 408, 
+            stderr: "Execution timeout (10s limit)", 
+            stdout: output 
+          });
         }, 10000);
       });
     });
@@ -158,7 +198,7 @@ app.post("/create-room", (req, res) => {
 app.post("/run-cpp", async (req, res) => {
   try {
     const { code, stdin, flags } = req.body;
-    executeCode(code, stdin, flags, (result) => {
+    executeCode(code, stdin || "", flags || "-std=c++17 -Wall", (result) => {
       if (!res.headersSent) {
         res.status(result.status || 200).json(result);
       }
@@ -169,6 +209,11 @@ app.post("/run-cpp", async (req, res) => {
       res.status(500).json({ error: JSON.stringify(error, null, 2) });
     }
   }
+});
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "OK", timestamp: new Date().toISOString() });
 });
 
 // 404 fallback
@@ -184,6 +229,7 @@ server.listen(PORT, () => {
 process.on("uncaughtException", (err) => {
   console.error("Uncaught Exception:", JSON.stringify(err, null, 2));
 });
+
 process.on("unhandledRejection", (reason, promise) => {
   console.error("Unhandled Rejection at:", promise, "reason:", JSON.stringify(reason, null, 2));
 });

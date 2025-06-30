@@ -13,7 +13,9 @@ function App() {
       54: 'cpp'
   };
   
-  const [socket] = useState(() => io(process.env.CLIENT_ORIGIN || "http://localhost:8000", {
+  const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+  
+  const [socket] = useState(() => io(API_BASE_URL, {
     withCredentials: true,
     autoConnect: false
   }));

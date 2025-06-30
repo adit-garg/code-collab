@@ -138,10 +138,12 @@ function Home() {
     const [joinRoomId, setJoinRoomId] = useState('');
     const [isCreating, setIsCreating] = useState(false);
 
+    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
     const createNewRoom = async () => {
         setIsCreating(true);
         try {
-            const response = await fetch(`${process.env.CLIENT_ORIGIN || 'http://localhost:8000'}/create-room`, {
+            const response = await fetch(`${API_BASE_URL}/create-room`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             });
