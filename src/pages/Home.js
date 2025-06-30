@@ -141,7 +141,7 @@ function Home() {
     const createNewRoom = async () => {
         setIsCreating(true);
         try {
-            const response = await fetch('http://localhost:8000/create-room', {
+            const response = await fetch(`${process.env.CLIENT_ORIGIN || 'http://localhost:8000'}/create-room`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             });

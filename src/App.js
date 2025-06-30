@@ -13,7 +13,7 @@ function App() {
       54: 'cpp'
   };
   
-  const [socket] = useState(() => io('http://localhost:8000', {
+  const [socket] = useState(() => io(process.env.CLIENT_ORIGIN || "http://localhost:3000", {
     withCredentials: true,
     autoConnect: false
   }));

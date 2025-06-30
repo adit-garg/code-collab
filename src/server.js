@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_ORIGIN || "http://localhost:3000",
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 // CORS middleware
 app.use("/", (req, resp, next) => {
   resp.header("Access-Control-Allow-Credentials", true);
-  resp.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  resp.header("Access-Control-Allow-Origin", process.env.CLIENT_ORIGIN || "http://localhost:3000");
   resp.header("Access-Control-Allow-Headers", "Content-Type, GET, POST, OPTIONS");
   next();
 });
