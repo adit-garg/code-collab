@@ -1,0 +1,306 @@
+/* Home page styling to match App.css */
+
+.home-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    color: #e8e8e8;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.home-content {
+    max-width: 1000px;
+    width: 100%;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.home-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.home-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #00d4ff, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.home-subtitle {
+    font-size: 1.25rem;
+    color: #b0b0b0;
+    font-weight: 400;
+    margin: 0;
+    animation: fadeIn 0.7s ease forwards;
+}
+
+.home-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.home-card {
+    background: linear-gradient(145deg, #1a1a1a 0%, #222222 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 0.9s ease forwards;
+}
+
+.home-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.home-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1), 0 0 0 1px rgba(0, 212, 255, 0.1);
+}
+
+.home-card:hover::before {
+    opacity: 1;
+}
+
+.card-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #e8e8e8;
+    margin: 0;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #b0b0b0;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 300px;
+}
+
+.input-group {
+    width: 100%;
+    max-width: 300px;
+}
+
+.home-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: #e8e8e8;
+    font-size: 1rem;
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.home-input:focus {
+    outline: none;
+    border-color: #00d4ff;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    color: #fff;
+}
+
+.home-input::placeholder {
+    color: #666;
+    font-style: italic;
+}
+
+.home-btn {
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    min-width: 200px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.home-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.home-btn:hover::before {
+    left: 100%;
+}
+
+.home-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-success:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.home-solo {
+    text-align: center;
+    animation: fadeIn 1.1s ease forwards;
+}
+
+.btn-outline {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #e8e8e8;
+    backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 3rem;
+    font-size: 1.1rem;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+.solo-icon {
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 1rem;
+    }
+    
+    .home-title {
+        font-size: 2.5rem;
+    }
+    
+    .home-subtitle {
+        font-size: 1rem;
+    }
+    
+    .home-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .home-card {
+        padding: 2rem;
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+    }
+    
+    .card-description {
+        font-size: 0.9rem;
+    }
+    
+    .home-btn {
+        padding: 0.875rem 2rem;
+        font-size: 0.9rem;
+        min-width: 180px;
+    }
+    
+    .btn-outline {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-title {
+        font-size: 2rem;
+    }
+    
+    .home-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .home-card {
+        padding: 1.5rem;
+    }
+    
+    .card-icon {
+        font-size: 2.5rem;
+    }
+}
