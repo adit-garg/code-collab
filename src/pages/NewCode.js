@@ -12,6 +12,7 @@ function NewCode() {
 
     const monaco = useMonaco();
     const [editor, setEditor] = useState(null);
+    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     const runCode = useCallback(() => {
         const data = {
             code,
@@ -19,7 +20,7 @@ function NewCode() {
             flags
         };
         console.log(data);
-        fetch('http://localhost:8000/run-cpp', {
+        fetch(`${API_BASE_URL}/run-cpp`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: { "Content-Type": "application/json" },
