@@ -1,14 +1,17 @@
-/* Home page styling to match App.css */
+/* Home page styling with working scrollbar */
 
 .home-container {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
     color: #e8e8e8;
-    padding: 2rem;
+    padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Ensure scrolling is enabled */
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .home-content {
@@ -19,12 +22,12 @@
 
 .home-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     position: relative;
 }
 
 .home-title {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
     background: linear-gradient(45deg, #00d4ff, #ff6b6b);
     -webkit-background-clip: text;
@@ -32,28 +35,30 @@
     background-clip: text;
     margin-bottom: 1rem;
     animation: fadeIn 0.5s ease forwards;
+    line-height: 1.2;
 }
 
 .home-subtitle {
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: #b0b0b0;
     font-weight: 400;
     margin: 0;
     animation: fadeIn 0.7s ease forwards;
+    padding: 0 1rem;
 }
 
 .home-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .home-card {
     background: linear-gradient(145deg, #1a1a1a 0%, #222222 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
-    padding: 2.5rem;
+    padding: 2rem;
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
@@ -74,7 +79,7 @@
 }
 
 .home-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     border-color: rgba(0, 212, 255, 0.3);
     box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1), 0 0 0 1px rgba(0, 212, 255, 0.1);
 }
@@ -92,43 +97,45 @@
 }
 
 .card-icon {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
     opacity: 0.9;
 }
 
 .card-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: #e8e8e8;
     margin: 0;
 }
 
 .card-description {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #b0b0b0;
     line-height: 1.5;
     margin: 0;
-    max-width: 300px;
+    max-width: 280px;
 }
 
 .input-group {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
 }
 
 .home-input {
     width: 100%;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1rem 1.5rem;
+    padding: 0.875rem 1rem;
     border-radius: 8px;
     color: #e8e8e8;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
     text-align: center;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
+    min-height: 44px;
+    box-sizing: border-box;
 }
 
 .home-input:focus {
@@ -145,18 +152,20 @@
 }
 
 .home-btn {
-    padding: 1rem 2.5rem;
+    padding: 0.875rem 2rem;
     border-radius: 8px;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
     position: relative;
     overflow: hidden;
-    min-width: 200px;
+    min-width: 180px;
+    min-height: 44px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    box-sizing: border-box;
 }
 
 .home-btn::before {
@@ -215,8 +224,11 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 1.25rem 3rem;
-    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
 }
 
 .btn-outline:hover {
@@ -228,7 +240,7 @@
 }
 
 .solo-icon {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     opacity: 0.8;
 }
 
@@ -244,56 +256,94 @@
     }
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
+/* Tablet styles */
+@media (min-width: 768px) {
     .home-container {
-        padding: 1rem;
-    }
-    
-    .home-title {
-        font-size: 2.5rem;
-    }
-    
-    .home-subtitle {
-        font-size: 1rem;
-    }
-    
-    .home-cards {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .home-card {
         padding: 2rem;
     }
     
-    .card-title {
+    .home-title {
+        font-size: 3.5rem;
+    }
+    
+    .home-subtitle {
         font-size: 1.25rem;
+        padding: 0;
+    }
+    
+    .home-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+    
+    .home-card {
+        padding: 2.5rem;
+    }
+    
+    .card-icon {
+        font-size: 3rem;
+    }
+    
+    .card-title {
+        font-size: 1.5rem;
     }
     
     .card-description {
-        font-size: 0.9rem;
+        font-size: 1rem;
+        max-width: 300px;
+    }
+    
+    .input-group {
+        max-width: 300px;
+    }
+    
+    .home-input {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
     }
     
     .home-btn {
-        padding: 0.875rem 2rem;
-        font-size: 0.9rem;
-        min-width: 180px;
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+        min-width: 200px;
     }
     
     .btn-outline {
-        padding: 1rem 2rem;
-        font-size: 1rem;
+        padding: 1.25rem 3rem;
+        font-size: 1.1rem;
+        max-width: none;
+        width: auto;
+    }
+    
+    .solo-icon {
+        font-size: 1.5rem;
+    }
+    
+    .home-header {
+        margin-bottom: 4rem;
     }
 }
 
+/* Large desktop styles */
+@media (min-width: 1024px) {
+    .home-cards {
+        grid-template-columns: repeat(2, minmax(400px, 1fr));
+    }
+}
+
+/* Small mobile adjustments */
 @media (max-width: 480px) {
+    .home-container {
+        padding: 0.5rem;
+    }
+    
     .home-title {
         font-size: 2rem;
     }
     
-    .home-cards {
-        grid-template-columns: 1fr;
+    .home-subtitle {
+        font-size: 0.9rem;
     }
     
     .home-card {
@@ -301,6 +351,149 @@
     }
     
     .card-icon {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .card-description {
+        font-size: 0.85rem;
+    }
+    
+    .home-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.85rem;
+        min-width: 160px;
+    }
+    
+    .btn-outline {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Accessibility improvements */
+.home-btn:focus-visible {
+    outline: 2px solid #00d4ff;
+    outline-offset: 2px;
+}
+
+.home-input:focus-visible {
+    outline: 2px solid #00d4ff;
+    outline-offset: 2px;
+}
+
+/* Global scrollbar styling - FIXED VERSION */
+/* Apply to html and body to ensure it works globally */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 212, 255, 0.6) rgba(26, 26, 26, 0.8);
+    overflow-y: auto;
+}
+
+body {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 212, 255, 0.6) rgba(26, 26, 26, 0.8);
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+    background: rgba(26, 26, 26, 0.8);
+    border-radius: 4px;
+    margin: 2px;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.6), rgba(255, 107, 107, 0.4));
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.8), rgba(255, 107, 107, 0.6));
+}
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner,
+*::-webkit-scrollbar-corner {
+    background: rgba(26, 26, 26, 0.8);
+}
+
+/* Specific styling for scrollable elements */
+.home-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.home-container::-webkit-scrollbar-track {
+    background: rgba(26, 26, 26, 0.8);
+    border-radius: 4px;
+}
+
+.home-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.6), rgba(255, 107, 107, 0.4));
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.home-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.8), rgba(255, 107, 107, 0.6));
+}
+
+/* Touch improvements */
+@media (hover: none) and (pointer: coarse) {
+    .home-card:hover {
+        transform: none;
+    }
+    
+    .home-btn:hover {
+        transform: none;
+    }
+    
+    .home-card:active {
+        transform: scale(0.98);
+    }
+    
+    .home-btn:active {
+        transform: scale(0.95);
+    }
+    
+    /* Thinner scrollbar for touch devices */
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar,
+    *::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    
+    html {
+        scrollbar-width: thin;
+    }
+}
+
+/* Force scrollbar to always show if content overflows */
+.home-container {
+    height: 100vh;
+    overflow-y: scroll; /* Force scrollbar */
+}
+
+/* Ensure content can create overflow for testing */
+.home-content {
+    min-height: calc(100vh + 1px); /* This will force a scrollbar for testing */
 }
