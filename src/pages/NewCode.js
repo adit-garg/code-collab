@@ -80,7 +80,7 @@ function NewCode() {
 
     return (
         <div className="d-flex flex-column vh-100">
-        {/* Header */}
+
         <div className='Header'>
           <div className="logo">CodeLab</div>
           <button onClick={runCode} className="btn btn-primary">
@@ -88,9 +88,9 @@ function NewCode() {
           </button>
         </div>
 
-        {/* Body */}
+
         <div className='Body'>
-          {/* Editor */}
+      
           <div className="Editor">
             <Editor
               height="100%"
@@ -103,9 +103,9 @@ function NewCode() {
             />
           </div>
 
-          {/* Sidebar */}
+ 
           <div className='Sidebar'>
-            {/* Input Section */}
+         
             <div>
               <div className="toggle-label">Input</div>
               <div className="toggle-section">
@@ -124,7 +124,7 @@ function NewCode() {
                 </button>
               </div>
               
-              {/* Input Fields */}
+              
               <div className="io-container">
                 {stdinActive ? (
                   <div className='stdin'>
@@ -146,7 +146,7 @@ function NewCode() {
               </div>
             </div>
 
-            {/* Output Section */}
+            
             <div>
               <div className="toggle-label">Output</div>
               <div className="toggle-section">
@@ -165,7 +165,7 @@ function NewCode() {
                 </button>
               </div>
               
-              {/* Output Fields */}
+              
               <div className="io-container">
                 {stdoutActive ? (
                   <div className='stdout'>
@@ -181,7 +181,7 @@ function NewCode() {
           </div>
         </div>
 
-        {/* Footer */}
+        
         <div className='Footer'>
           🚀 Collaborative Code Session • Build something amazing
         </div>
@@ -190,75 +190,3 @@ function NewCode() {
   }
   
 export default NewCode;
-        // <div>
-        //     <div className='Header'>
-        //         <button onClick={runCode}>Run Code</button>
-        //     </div>
-        //     <div className='Body'>
-        //         <div className="Editor">
-        //             <Editor
-        //                 height="94vh"
-        //                 defaultLanguage={langs[langId]}
-        //                 defaultValue={code}
-        //                 theme='vs-dark'
-        //                 width="auto"
-        //                 onChange={codeChanged}
-        //                 onMount={(edit) => setEditor(edit)}
-        //             />
-        //         </div>
-        //         <div className='Sidebar'>
-        //             <div>
-        //                 <button
-        //                     style={{ color: stdinActive ? activeGreen : inactiveGreen }}
-        //                     className='editor-btn'
-        //                     onClick={() => setStdinActive(!stdinActive)}
-        //                 >
-        //                     STDIN
-        //                 </button> | 
-        //                 <button
-        //                     style={{ color: !stdinActive ? activeGreen : inactiveGreen }}
-        //                     className='editor-btn'
-        //                     onClick={() => setStdinActive(!stdinActive)}
-        //                 >
-        //                     FLAGS
-        //                 </button>
-        //             </div>
-        //             {
-        //                 stdinActive ? (
-        //                     <div className='stdin'>
-        //                         <textarea value={stdin} onChange={e => setStdin(e.target.value)} />
-        //                     </div>
-        //                 ) : (
-        //                     <div className='flags'>
-        //                         <textarea value={flags} onChange={e => setFlags(e.target.value)} />
-        //                     </div>
-        //                 )
-        //             }
-        //             <div>
-        //                 <button
-        //                     style={{ color: stdoutActive ? activeGreen : inactiveGreen }}
-        //                     className='editor-btn'
-        //                     onClick={() => setStdoutActive(!stdoutActive)}
-        //                 >
-        //                     STDOUT
-        //                 </button> | 
-        //                 <button
-        //                     style={{ color: !stdoutActive ? activeGreen : inactiveGreen }}
-        //                     className='editor-btn'
-        //                     onClick={() => setStdoutActive(!stdoutActive)}
-        //                 >
-        //                     STDERR
-        //                 </button>
-        //             </div>
-        //             {
-        //                 stdoutActive ? (
-        //                     <div className='stdout'>{stdout}</div>
-        //                 ) : (
-        //                     <div className='stderr'>{stderr}</div>
-        //                 )
-        //             }
-        //         </div>
-        //     </div>
-        //     <div className='Footer'></div>
-        // </div>
-
