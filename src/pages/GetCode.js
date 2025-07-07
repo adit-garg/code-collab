@@ -545,9 +545,6 @@ function GetCode() {
                     <span className={`badge ${isConnected ? 'bg-success' : 'bg-danger'}`}>
                         {connectionStatus}
                     </span>
-                    <span className="user-count">
-                        👥 {connectedUsers.size + 1} users
-                    </span>
                     {currentUserAnimal.current && (
                         <span className="current-user-badge" style={{ color: currentUserColor.current }}>
                             You are: {currentUserAnimal.current}
@@ -555,7 +552,7 @@ function GetCode() {
                     )}
                 </div>
                 <div className='header-right'>
-                    <span className="room-info">Room: {id}</span>
+                    <div><span className="room-info">Room: {id}</span></div>
                     <button className="btn btn-outline-light btn-sm" onClick={copyRoomLink}>
                         📋 Copy Link
                     </button>
